@@ -16,7 +16,7 @@ public class SumNums {
 			int startNum = Integer.parseInt(args[0]);
 			int endNum = Integer.parseInt(args[1]);
 			int sum=0;
-			// You have something to fix here!
+			sum = sumup(startNum, endNum);
 			System.out.println("The sum from "+startNum+ " to "+ endNum + " is: "+ sum);
 
 		} catch (NumberFormatException e){
@@ -24,6 +24,15 @@ public class SumNums {
 		}
 	}
 
-	// Create static method sumup(s,e) which returns the sum s+(s+1)+...+(e-1)+e
+	public static int sumup(int s, int e){
+                int hold = 0;
+                while (s <= e){
+                        hold += s;
+                        s = s +1;
+                }
+                return hold;
+
+        }
+        // Create static method sumup(s,e) which returns the sum s+(s+1)+...+(e-1)+e
 	// or 0 if this sum does not make sense (ie sumup(3,-4)).
 }
