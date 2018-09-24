@@ -13,5 +13,44 @@
  */
 public class Scenario {
 
+    public static void main(String [] args){
+        Person Jack = new Person("Jack");
+        SodaCan RootBeer = new SodaCan("RootBeer");
+        SodaCan GingerAle = new SodaCan("GingerAle");
+        Person Jill = new Person("Jill");
+        SodaCan Cherry = new SodaCan("Cherry");
+        SodaCan Grape = new SodaCan("Grape");
 
+        RootBeer.open();
+        Jill.gulpFrom(RootBeer);
+        Jill.gulpFrom(RootBeer);
+        Jill.gulpFrom(RootBeer);
+        Jill.gulpFrom(RootBeer);
+        Jill.gulpFrom(RootBeer);
+        Jill.getThirstStatus();
+        
+        Cherry.open();
+        Jill.gulpFrom(Cherry);
+        Jill.gulpFrom(Cherry);
+        Jill.sipFrom(Cherry);
+        Jill.sipFrom(Cherry);
+        Jill.sipFrom(Cherry);
+
+        Jack.sipFrom(Cherry);
+        Cherry.getAmount();
+
+        Grape.open();
+        Jack.gulpFrom(Grape);
+        Jack.gulpFrom(Grape);
+        Jack.sipFrom(Grape);
+        Jack.sipFrom(Grape);
+        Jack.getThirstStatus();
+        
+        Cherry.getAmount();
+        Grape.getAmount();
+        GingerAle.getAmount();
+        RootBeer.getAmount();
+    }
 }
+
+ 
