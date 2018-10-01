@@ -21,16 +21,12 @@ public class JugPuzzleController {
         }
 
         /**
-         * FILL THIS IN (describe what this method is about)
-         * To see what good documentation looks like, look at the API documentation, 
-         * for example ArrayList (in the bottom left frame) at 
-         * http://download.oracle.com/javase/8/docs/api/
-         * this documentation was created using Javadoc. 
-         * FILL THIS IN (describe what this method is about)
-         * @param message (FILL THIS IN)
-         * @param lower   (FILL THIS IN)
-         * @param upper   (FILL THIS IN)
-         * @return        (FILL THIS IN)
+         * Checks if the move is possible and returns the jug number if it is 
+         * 
+         * @param message A String that narrates what action is being done (i.e spills form jug:, into jug:, etc.)
+         * @param lower   the lower bound (the first jug) 
+         * @param upper   the upper bound (the last jug)
+         * @return        the jug we could perform an action on(i.e the int in the second line of message)
          */
         private int getMove(String message, int lower, int upper){
                 int move;
@@ -51,7 +47,9 @@ public class JugPuzzleController {
                 }
         }
         /**
-         * FILL THIS IN (describe what this method is about)
+         * Allows the user to play the game by continuously asking the user for input
+         * Stops asking for input once the user has solved the puzzle
+         * Then informs the user of how many moves it took them to solve the puzzle.
          */
         public void play(){
                 while(!jugPuzzle.isPuzzleSolved()){
@@ -67,6 +65,15 @@ public class JugPuzzleController {
                 	System.out.println("Congrats you solved it in "+jugPuzzle.getMoves()+" moves!!");
                 }
         }
+        
+    	/**
+    	 * Creates a string representation of the game so far
+    	 * @return A string representation of the game
+    	 **/
+        public String toString() {
+    		String rV = "Return Value";
+    		return rV;
+    	}//toString
 
         public static void main(String [] args){
                 JugPuzzleController jpcc=new JugPuzzleController();
