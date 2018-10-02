@@ -40,7 +40,7 @@ public class JugPuzzle {
 	}//move
 	
 	/**
-	 * Return the number of moves so far in JugPuzzle
+	 * Return the number of moves taken so far in JugPuzzle
 	 * @return Return the moves
 	 **/
 	public int getMoves() {
@@ -59,7 +59,7 @@ public class JugPuzzle {
 	}//isPuzzleSolved
 	
 	/**
-	 * Creates a string representation of JugPuzzle
+	 * Creates and returns a string representation of JugPuzzle
 	 * @return A string representation of JugPuzzle
 	 **/
     public String toString() {
