@@ -26,7 +26,17 @@ public abstract class Puzzle {
 	 * @param states initially empty, will contain all puzzle states 
 	 * reachable from this by the execution of one valid puzzle move.
 	 */
-	public abstract void nextStates(States states);
+	
+	/**
+	 * Adds all puzzles which are one move away from this puzzle to states
+	 * @param capacity the amount the jug could hold
+	 * @param amount the amount of water in the cup
+	 * @return A string representation of Jug
+	 **/
+	public void nextStates(States states) {
+		
+		
+	}
 	public abstract boolean isPuzzleSolved();
 
 	public static void solve(Puzzle p) {
