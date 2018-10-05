@@ -37,7 +37,12 @@ public abstract class Puzzle {
 		
 		
 	}
-	public abstract boolean isPuzzleSolved();
+	public boolean isPuzzleSolved() {
+		if(this.firstJug == 4 && this.seconfJug ==4) {
+			return true;
+		}
+		return false;
+	}
 
 	public static void solve(Puzzle p) {
 		States previousStates=new States();
