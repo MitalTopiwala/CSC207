@@ -1,28 +1,23 @@
 package ca.utoronto.utm.assignment1.q2;
 
+import ca.utoronto.utm.assignment1.puzzle.Puzzle;
+import ca.utoronto.utm.assignment1.puzzle.States;
+
 /**
  * 
  * @author csc207student 
  *
  */
-public class JugPuzzle {
-	private int [] jugAmount;
-	private int [] jugCapacity;
+public class JugPuzzle extends Puzzle{
+	private Jug[] jugList;
 	
 	private int numMoves;
 	
 	public JugPuzzle() {
-		jugAmount = new int[3];
-		jugCapacity = new int[3];
-		
-		this.jugCapacity[0] = 8;
-		this.jugCapacity[1] = 5;
-		this.jugCapacity[2] = 3;
-		
-		this.jugAmount[0] = 8;
-		this.jugAmount[1] = 0;
-		this.jugAmount[2] = 0;
-		
+		jugList = new Jug[3];
+		this.jugList[0] = new Jug(8, 8);
+		this.jugList[1] = new Jug(5, 0);
+		this.jugList[2] = new Jug(3, 0);
 		
 		this.numMoves = 0;
 		
@@ -34,15 +29,15 @@ public class JugPuzzle {
 	 *  @param to The jug water is being spilled into 
 	 **/
 	public void move(int from, int to) {
-		int amountToPour = this.jugCapacity[to] - this.jugAmount[to];
-		int amountInStart = this.jugAmount[from];
+		int amountToPour = this.jugList[to].capacity - this.jugList[to].amount;
+		int amountInStart = this.jugList[from].amount;
 		
 		if (amountInStart >= amountToPour) {
-			this.jugAmount[from] = this.jugAmount[from] - amountToPour;
-			this.jugAmount[to] = this.jugAmount[to] + amountToPour;
+			this.jugList[from].amount = this.jugList[from].amount - amountToPour;
+			this.jugList[to].amount = this.jugList[to].amount + amountToPour;
 		}else {
-			this.jugAmount[from] = 0;
-			this.jugAmount[to] = this.jugAmount[to] + amountInStart;
+			this.jugList[from].amount = 0;
+			this.jugList[to].amount = this.jugList[to].amount + amountInStart;
 		}
 		this.numMoves += 1;
 		
@@ -61,7 +56,7 @@ public class JugPuzzle {
 	 * @return Return true iff the puzzle is solved
 	 **/
 	public boolean isPuzzleSolved() {
-		if(this.jugAmount[0] == 4 && this.jugAmount[1] ==4) {
+		if(this.jugList[0].amount == 4 && this.jugList[1].amount ==4) {
 			return true;
 		}
 		return false;
@@ -72,8 +67,15 @@ public class JugPuzzle {
 	 * @return A string representation of JugPuzzle
 	 **/
     public String toString() {
-    	String rV = this.numMoves+ " 0:("+ this.jugAmount[0]+"/"+this.jugCapacity[0]+") 1:("+ this.jugAmount[1]+"/"+this.jugCapacity[1]+") 2:("+ this.jugAmount[2]+"/"+this.jugCapacity[2]+")";
+    	String rV = this.numMoves+ " 0:("+ this.jugList[0].amount+"/"+this.jugList[0].capacity+") 1:("+ this.jugList[1].amount+"/"+this.jugList[1].capacity+") 2:("+ this.jugList[2].amount+"/"+this.jugList[2].capacity+")";
 		return rV;
 	}//toString
+
+	@Override
+	public void nextStates(States states) {
+		// TODO Auto-generated method stub
+		
+		
+	}
 
 }

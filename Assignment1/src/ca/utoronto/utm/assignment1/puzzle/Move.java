@@ -12,6 +12,5 @@ package ca.utoronto.utm.assignment1.puzzle;
  *
  */
 public interface Move {
-	
 	public String toString();
 }
