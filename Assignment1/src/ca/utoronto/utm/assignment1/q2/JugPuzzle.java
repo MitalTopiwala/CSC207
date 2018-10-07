@@ -20,7 +20,9 @@ public class JugPuzzle extends Puzzle{
 	public int numMoves;
 	
 	public JugPuzzle() {
+		
 		jugList = new Jug[3];
+		
 		this.jugList[0] = new Jug(8, 8);
 		this.jugList[1] = new Jug(5, 0);
 		this.jugList[2] = new Jug(3, 0);
@@ -30,25 +32,14 @@ public class JugPuzzle extends Puzzle{
 	}//constructor
 	
 	
-	public JugPuzzle(Jug one, Jug two, Jug three, int numMoves) {
-		jugList = new Jug[3];
-		this.jugList[0] = one;
-		this.jugList[1] = two;
-		this.jugList[2] = three;
-		
-		this.numMoves = numMoves;
-
-		
-	}//constructor2
-	
 	
 	/**
 	 *  Makes a move
 	 *  @param from The jug water is spilled from
 	 *  @param to The jug water is being spilled into 
 	 **/
-	 
 	public void move(int from, int to) {
+		
 		int amountToPour = this.jugList[to].capacity - this.jugList[to].amount;
 		int amountInStart = this.jugList[from].amount;
 		
@@ -68,21 +59,34 @@ public class JugPuzzle extends Puzzle{
 	 * @return Return the moves
 	 **/
 	public int getMoves() {
+		
 		return this.numMoves;
+		
 	}//getMoves
+	
+	
 	
 	/**
 	 * Determines if the puzzle is solved
 	 * @return Return true iff the puzzle is solved
 	 **/
 	public boolean isPuzzleSolved() {
+		
 		if(this.jugList[0].amount == 4 && this.jugList[1].amount ==4) {
 			return true;
 		}
 		return false;
+		
 	}//isPuzzleSolved
 	
+	
+	
+	/**
+	 * Creates a copy of JugPuzzle
+	 * @return copy of JugPuzzle
+	 **/
 	public JugPuzzle copy() {
+		
 		JugPuzzle rPuzzle = new JugPuzzle();
 		
 		for(int i = 0; i < 3; i++) {
@@ -92,32 +96,44 @@ public class JugPuzzle extends Puzzle{
 		
 	}//copy
 		
+	
+	
 	/**
 	 * Creates and returns a string representation of JugPuzzle
 	 * @return A string representation of JugPuzzle
 	 **/
     public String toString() {
+    	
     	String rV = this.numMoves+ " 0:("+ this.jugList[0].amount+"/"+this.jugList[0].capacity+") 1:("+ this.jugList[1].amount+"/"+this.jugList[1].capacity+") 2:("+ this.jugList[2].amount+"/"+this.jugList[2].capacity+")";
 		return rV;
+		
 	}//toString
 
+    
+    
+	/**
+	 * Returns a JugMove arraylist of all of the possible moves the JugPuzzle can make 
+	 * @return a array list of all next possible moves
+	 **/
     public JugMove[] allPossibleMoves() {
+    	
     	JugMove one = new JugMove(0,1);
     	JugMove two = new JugMove(0,2);
     	JugMove three = new JugMove(1,0);
     	JugMove four = new JugMove(1,2);
     	JugMove five = new JugMove(2,0);
     	JugMove six = new JugMove(2,1);
+    	
     	JugMove [] allMoves = new JugMove []{one,two,three,four,five,six};
 		return allMoves;
+		
 	}//allPossibleMoves
     
-	@Override
+	/**
+	 * Adds all of the next possible states of the JugPuzzle, and adds them to states
+	 * @param states the arraylist all the next possible states will be added to
+	 **/
 	public void nextStates(States states) {
-		// TODO Auto-generated method stub
-		//Jug firstJug = (states[0].getPuzzle().copy());
-		//Jug secJug = (states[0].getPuzzle().jugList[1]);
-		//Jug thirdJug = ((states[0].getPuzzle()).jugList[2]);
 		
 		JugMove [] allPossibleMoves;
 		allPossibleMoves = allPossibleMoves();
@@ -130,10 +146,8 @@ public class JugPuzzle extends Puzzle{
 			int to = move.end;
 			tempPuzzle.move(from, to);
 			states.add(tempPuzzle, move);
-			
 		}//for
 	
-		
 	}//nextStates
 	
 	

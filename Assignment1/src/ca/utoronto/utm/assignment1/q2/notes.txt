@@ -5,28 +5,21 @@ the code in solve uses these to solve any puzzle which correctly
 uses the framework.
 
 The Move class in the puzzle packages is an 
-interface(that defines a move) used by JugPuzzleSolver 
-to make a move.
+interface that will be implemented by JugMove
 
-The States class is an interface that Puzzle uses(as 
-the nextState method in Puzzle needs to use methods in States.
+The JugPuzzle class extends the Puzzle class.
 
 The solve method in Puzzle determines the moves that 
 need to be taken in order to solve the jug puzzle, 
-and that solve function relies on the nextStates that 
-is also in puzzle.
+and that solve function relies on the nextStates method which 
+is in JugPuzzle.
 
-The nextStates method in Puzzle uses the setPreviousState 
-method in class States to hold the value of the current state.
+The nextStates method in JugPuzzle relies on the allPossibleMoves
+method which is also in the JugPuzzle class.
 
 The printSolution method in Puzzle uses previousState
 to follow a path from solved puzzle back to initial 
 puzzle and so can print the moves needed to solve the puzzle.
 
 
-The states parameter in nextStates has all the 
-states that are one move away from 'this'(i.e the previousState value') puzzle. 
-nextStates is a method in Puzzle that is executed 
-in order to do something with it states parameter 
-and return info to the solve function in the Puzzle class.
 

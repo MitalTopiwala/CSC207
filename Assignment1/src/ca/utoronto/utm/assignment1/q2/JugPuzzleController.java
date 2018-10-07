@@ -26,7 +26,7 @@ public class JugPuzzleController {
          * @param message A String that narrates what action is being done (i.e spills form jug:, into jug:, etc.)
          * @param lower   the lower bound (the first jug) 
          * @param upper   the upper bound (the last jug)
-         * @return        the jug we could perform an action on(i.e the int in the second line of message)
+         * @return        the move that has been checked to be possible
          */
         private int getMove(String message, int lower, int upper){
                 int move;
@@ -71,8 +71,7 @@ public class JugPuzzleController {
     	 * @return A string representation of the game
     	 **/
         public String toString() {
-    		String rV = "Return Value";
-    		return rV;
+    		return this.jugPuzzle.toString();
     	}//toString
 
         public static void main(String [] args){

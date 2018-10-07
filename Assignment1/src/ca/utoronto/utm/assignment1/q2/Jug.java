@@ -1,5 +1,11 @@
 package ca.utoronto.utm.assignment1.q2;
 
+/**
+ * Create a Jug type for JugPuzzle to use 
+ * 
+ * @author mital
+ *
+ */
 public class Jug {
 	
 	int capacity;

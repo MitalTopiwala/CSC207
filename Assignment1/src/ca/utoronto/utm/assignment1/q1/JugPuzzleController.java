@@ -71,8 +71,7 @@ public class JugPuzzleController {
     	 * @return A string representation of the game
     	 **/
         public String toString() {
-    		String rV = "Return Value";
-    		return rV;
+        	return this.jugPuzzle.toString();
     	}//toString
 
         public static void main(String [] args){
