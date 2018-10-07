@@ -1,7 +1,13 @@
 package ca.utoronto.utm.assignment1.q2;
 
+import ca.utoronto.utm.assignment1.puzzle.Move;
 import ca.utoronto.utm.assignment1.puzzle.Puzzle;
 import ca.utoronto.utm.assignment1.puzzle.States;
+import ca.utoronto.utm.assignment1.puzzle.State;
+//import ca.utoronto.utm.assignment1.q2.JugMove;
+
+
+import java.util.ArrayList;
 
 /**
  * 
@@ -9,9 +15,9 @@ import ca.utoronto.utm.assignment1.puzzle.States;
  *
  */
 public class JugPuzzle extends Puzzle{
-	private Jug[] jugList;
+	public Jug[] jugList;
 	
-	private int numMoves;
+	public int numMoves;
 	
 	public JugPuzzle() {
 		jugList = new Jug[3];
@@ -23,11 +29,25 @@ public class JugPuzzle extends Puzzle{
 		
 	}//constructor
 	
+	
+	public JugPuzzle(Jug one, Jug two, Jug three, int numMoves) {
+		jugList = new Jug[3];
+		this.jugList[0] = one;
+		this.jugList[1] = two;
+		this.jugList[2] = three;
+		
+		this.numMoves = numMoves;
+
+		
+	}//constructor2
+	
+	
 	/**
 	 *  Makes a move
 	 *  @param from The jug water is spilled from
 	 *  @param to The jug water is being spilled into 
 	 **/
+	 
 	public void move(int from, int to) {
 		int amountToPour = this.jugList[to].capacity - this.jugList[to].amount;
 		int amountInStart = this.jugList[from].amount;
@@ -42,14 +62,14 @@ public class JugPuzzle extends Puzzle{
 		this.numMoves += 1;
 		
 	}//move
-	
+
 	/**
 	 * Return the number of moves taken so far in JugPuzzle
 	 * @return Return the moves
 	 **/
 	public int getMoves() {
 		return this.numMoves;
-	}//getmoves
+	}//getMoves
 	
 	/**
 	 * Determines if the puzzle is solved
@@ -62,6 +82,16 @@ public class JugPuzzle extends Puzzle{
 		return false;
 	}//isPuzzleSolved
 	
+	public JugPuzzle copy() {
+		JugPuzzle rPuzzle = new JugPuzzle();
+		
+		for(int i = 0; i < 3; i++) {
+		    rPuzzle.jugList[i].amount = this.jugList[i].amount;
+		}
+		return rPuzzle;
+		
+	}//copy
+		
 	/**
 	 * Creates and returns a string representation of JugPuzzle
 	 * @return A string representation of JugPuzzle
@@ -71,11 +101,41 @@ public class JugPuzzle extends Puzzle{
 		return rV;
 	}//toString
 
+    public JugMove[] allPossibleMoves() {
+    	JugMove one = new JugMove(0,1);
+    	JugMove two = new JugMove(0,2);
+    	JugMove three = new JugMove(1,0);
+    	JugMove four = new JugMove(1,2);
+    	JugMove five = new JugMove(2,0);
+    	JugMove six = new JugMove(2,1);
+    	JugMove [] allMoves = new JugMove []{one,two,three,four,five,six};
+		return allMoves;
+	}//allPossibleMoves
+    
 	@Override
 	public void nextStates(States states) {
 		// TODO Auto-generated method stub
+		//Jug firstJug = (states[0].getPuzzle().copy());
+		//Jug secJug = (states[0].getPuzzle().jugList[1]);
+		//Jug thirdJug = ((states[0].getPuzzle()).jugList[2]);
+		
+		JugMove [] allPossibleMoves;
+		allPossibleMoves = allPossibleMoves();
 		
 		
-	}
+		for (JugMove move: allPossibleMoves) {
+			JugPuzzle tempPuzzle = this.copy();//enter the jugs in
+			
+			int from = move.start;
+			int to = move.end;
+			tempPuzzle.move(from, to);
+			states.add(tempPuzzle, move);
+			
+		}//for
+	
+		
+	}//nextStates
+	
+	
 
-}
+}//JugPuzzle

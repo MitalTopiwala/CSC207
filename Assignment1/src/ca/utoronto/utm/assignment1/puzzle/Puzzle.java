@@ -37,12 +37,16 @@ public abstract class Puzzle {
 		
 		while(true) {
 			States nextStates=new States();
+			//cycles through every state in previousStates
+			//(which is a Arraylist of states with 
 			for(State s: previousStates) {
 				if(s.getPuzzle().isPuzzleSolved()) {
 					printSolution(s);
 					return;
 				}
+				//makes
 				nextStates.setPreviousState(s);
+			    //adds
 				s.getPuzzle().nextStates(nextStates);
 			}
 			if(nextStates.isEmpty()) {

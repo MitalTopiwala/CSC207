@@ -19,6 +19,9 @@ public class JugPuzzle {
 		
 	}//constructor
 	
+	
+	
+	
 	/**
 	 *  Makes a move
 	 *  @param from The jug water is spilled from
