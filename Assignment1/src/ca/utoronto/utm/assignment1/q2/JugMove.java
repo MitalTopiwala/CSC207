@@ -16,7 +16,6 @@ public class JugMove implements Move{
 	 * Creates a JugMove
 	 * @param from the Jug that we are spilling water from
 	 * @param to the Jug that we are spilling water into
-	 * @return A string representation of Jug
 	 **/
 	public JugMove(int from, int to) {
 		this.start = from;
