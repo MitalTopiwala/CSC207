@@ -42,7 +42,7 @@ class ScribblePanel extends StackPane implements EventHandler<MouseEvent> {
 
 		// Draw bubbles
 		for (Pair p : this.drawingPoints) {
-			g2d.strokeOval(p.getX(), p.getY(), 4, 4);
+			g2d.strokeRect(p.getX(), p.getY(), 4, 4);
 		}
 
 		// Line drawing
