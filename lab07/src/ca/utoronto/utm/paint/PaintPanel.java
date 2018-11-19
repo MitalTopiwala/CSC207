@@ -60,6 +60,7 @@ class PaintPanel extends StackPane implements Observer, EventHandler<MouseEvent>
 		}
 
 		// Draw Circles
+		//UNDERSTAND
 		ArrayList<Circle> circles = this.model.getCircles();
 		for (Circle c : circles) {
 			int x = c.getCentre().getX();
@@ -127,6 +128,7 @@ class PaintPanel extends StackPane implements Observer, EventHandler<MouseEvent>
 		}
 	}
 
+	//UNDERSTAND
 	private void mousePressed(MouseEvent e) {
 		if (this.mode == "Squiggle") {
 
@@ -138,6 +140,7 @@ class PaintPanel extends StackPane implements Observer, EventHandler<MouseEvent>
 		}
 	}
 
+	//UNDERSTAND
 	private void mouseReleased(MouseEvent e) {
 		if (this.mode == "Squiggle") {
 
@@ -153,6 +156,7 @@ class PaintPanel extends StackPane implements Observer, EventHandler<MouseEvent>
 
 	}
 
+	//dont touch
 	private void mouseEntered(MouseEvent e) {
 		if (this.mode == "Squiggle") {
 

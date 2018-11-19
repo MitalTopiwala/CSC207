@@ -4,7 +4,18 @@
 
 # Sprint 1 Dec 28, 2018
 # Sprint 1 Backlog UserStories go below
-
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+TYPE     : BUG 6 : topiwal3
+NAME     : Circle drawing is broken
+OWNER    : 
+PRIORITY :
+ESTIMATE : 
+ISSUE    : The first click should specify the center of the circle, with
+           a drag for the radius. This is not the case in the current
+           implementation.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
 # Sprint 2 Nov 3, 2018
 # Sprint 2 Backlog UserStories go below
 

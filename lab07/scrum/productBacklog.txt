@@ -178,7 +178,7 @@ ISSUE    : Squiggles are connected to each other by a straight line. Each drag
            the issue is with the representation of the squiggles in the Model.
 --------------------------------------------------------------------------
 --------------------------------------------------------------------------
-TYPE     : BUG 6 : UTORID
+TYPE     : BUG 6 : topiwal3
 NAME     : Circle drawing is broken
 OWNER    : 
 PRIORITY :

@@ -6,15 +6,26 @@
 
    a) Factory Design Pattern
 
-      YOUR ANSWER GOES HERE
+      ShapeManipulatorFactory
+      ShapeManipulatorStrategy
+      CircleManipulatorStrategy
+      SquiggleManipulatorStrategy
+      RectangleManipulatorStrategy
 
    b) Strategy Design Pattern
 
-      YOUR ANSWER GOES HERE
+      ShapeManipulatorStrategy
+      CircleManipulatorStrategy
+      SquiggleManipulatorStrategy
+      RectangleManipulatorStrategy
 
    c) Command Design Pattern
 
-      YOUR ANSWER GOES HERE
+      PaintModel
+      PaintCommand
+      CircleCommand
+      SquiggleCommand
+      RectangleCommand
 
    d) Which classes are observable. Which classes are
       observers. Note that this is not included in the
@@ -23,11 +34,13 @@
 
       Observable:
 
-      YOUR ANSWER GOES HERE
+      PaintModel(and its subclasses, Rectangle, Circle, Squiggle)
+      Shape
 
       Observers are? What do they Observe?:
 
-      YOUR ANSWER GOES HERE
+      PaintPanel observes PaintModel
+      PaintCommand observes PaintModel
 
 2) Explain what happens in the code after each step in the following
    sequence of events:
@@ -45,18 +58,25 @@
 
    b) Next the user clicks in the Canvas on the PaintPanel.
 
-      YOUR ANSWER GOES HERE
+      The click fires the handle MouseEvent handler in PaintPanel, which calls ShapeManipulatorStrategy handle MouseEvent handler, which in tern reads the mouse event, and calls the ShapeManipulatorStrategy mouseClicked method.
 
    c) Next the user drags the mouse across the Canvas in the PaintPanel.
 
-      YOUR ANSWER GOES HERE
+      The click fires the handle MouseEvent handler in PaintPanel, which calls ShapeManipulatorStrategy handle MouseEvent handler, which in tern reads the mouse event, and calls the appropriate strategies mouseDragged method.PaintModel then notes its observers that a new shape has been added, through its update method, and then the repaint method in PaintPanel is called.
 
    d) Next the user clicks in the Canvas on the Paint Panel. 
 
-      YOUR ANSWER GOES HERE
+       The click fires the handle MouseEvent handler in PaintPanel, which calls ShapeManipulatorStrategy handle MouseEvent handler, which in tern reads the mouse event, and calls the ShapeManipulatorStrategy mouseClicked method.
 
    e) Next the user clicks the Rectangle Button on the ShapeChooserPanel.
 
-      YOUR ANSWER GOES HERE
+         The button fires the handle event handler in the ShapeChooserPanel
+      which asks the ShapeManipulatorFactory for a RectangleManipulatorStrategy
+      The RectangleManipulatorStrategy is hooked up to to the PaintModel
+      so that the strategy can modify the PaintModel in response to mouse events.
+      This new RectangleManipulatorStrategy is installed in the view
+      which in turn installs the strategy in the PaintPanel
+      so that now all PaintPanel mouse events are sent to the
+      new RectangleManipulatorStrategy.
 
 
