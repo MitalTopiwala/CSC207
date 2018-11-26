@@ -110,38 +110,46 @@ public class RegexFSMPractice {
 						state=10;
 					break;
 				case 5:
-					if(n!= len-4) 
-						state = 5;
-					else if (n == len -4)
+					if(n == 'x'||n == 'y'||n == 'z') 
 						state = 6;
 					else
 						state = 10;
 					break;
 				case 6:
-					if (c[n] == 'e') 
+					if(n!= len-4) 
+						state = 6;
+					else if (n == len -4)
 						state = 7;
-					else 
-						state=10;
+					else
+						state = 10;
 					break;
 				case 7:
-					if (c[n] == 'n') 
+					if (c[n] == 'e') 
 						state = 8;
 					else 
 						state=10;
 					break;
 				case 8:
+					if (c[n] == 'n') 
+						state = 9;
+					else 
+						state=10;
+					break;
+				case 9:
 					if (c[n] == 'd') 
-						state = 7;
+						state = 11;
 					else 
 						state=10;
 					break;
 				case 10:
 					break;
+				case 11:
+					break;
 
 			}
 			n = n + 1;
 		}
-		if (state == 10)
+		if (state != 11)
 			retVal=false;
 		
 		return retVal;
