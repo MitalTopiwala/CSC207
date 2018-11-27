@@ -4,7 +4,7 @@
 --------------------------------------------------------------------------
 TYPE     : USER STORY 3.1
 NAME     : Save Feature
-OWNER    :
+OWNER    :topiwal3
 PRIORITY : 1
 ESTIMATE :
 AS A     : user
@@ -22,7 +22,7 @@ Assignment3 project under Assignment3/paintSaveFileFormat.txt.
 --------------------------------------------------------------------------
 TYPE     : USER STORY 3.2
 NAME     : Load a Saved File
-OWNER    :
+OWNER    :topiwal3
 PRIORITY : 2
 ESTIMATE :
 AS A     : user
@@ -45,7 +45,7 @@ through a squiggle to properly parse it using Patterns and groups.
 --------------------------------------------------------------------------
 TYPE     : BUG 3.3
 NAME     : Improve architecture for save
-OWNER    :
+OWNER    :topiwal3
 PRIORITY : 3
 ESTIMATE :
 AS A     : 
@@ -62,7 +62,7 @@ the model to an appropriate Visitor.
 --------------------------------------------------------------------------
 TYPE     : BUG 3.4
 NAME     : Improve architecture for drawing
-OWNER    :
+OWNER    :topiwal3
 PRIORITY : 4
 ESTIMATE :
 AS A     : 
