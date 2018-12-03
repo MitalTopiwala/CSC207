@@ -9,6 +9,7 @@ public class Paint extends Application {
 	View view; // View + Controller
 
 	public static void main(String[] args) {
+		System.out.println("circle command");
 		launch(args);
 	}
 
