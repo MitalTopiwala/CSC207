@@ -136,10 +136,10 @@ public class View implements EventHandler<ActionEvent> {
 
 			if (file != null) {
 				System.out.println("Opening: " + file.getName() + "." + "\n");
-				// BufferedReader bufferedReader=null; // FIX THIS
+				 BufferedReader bufferedReader=null; // FIX THIS
 				PaintModel paintModel = new PaintModel();
-				// PaintFileParser parser = new PaintFileParser();
-				// parser.parse(bufferedReader,  paintModel);
+				 PaintFileParser parser = new PaintFileParser();
+				 parser.parse(bufferedReader,  paintModel);
 				this.setPaintModel(paintModel);
 			} else {
 				System.out.println("Open command cancelled by user." + "\n");

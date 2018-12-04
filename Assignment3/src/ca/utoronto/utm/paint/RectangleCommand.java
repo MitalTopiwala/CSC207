@@ -3,7 +3,7 @@ import javafx.scene.canvas.GraphicsContext;
 
 public class RectangleCommand extends PaintCommand {
 	private Point p1,p2;
-	//private String type = "Rectangle";
+	
 	public RectangleCommand(Point p1, Point p2){
 		this.p1 = p1; this.p2=p2;
 		this.setChanged();
