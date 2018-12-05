@@ -3,6 +3,7 @@ package ca.utoronto.utm.paint;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.PrintWriter;
 
 import javafx.event.ActionEvent;
@@ -136,10 +137,17 @@ public class View implements EventHandler<ActionEvent> {
 
 			if (file != null) {
 				System.out.println("Opening: " + file.getName() + "." + "\n");
-				 BufferedReader bufferedReader=null; // FIX THIS
+				
+				BufferedReader bufferedReader=null; // FIX THIS
+				try {
+					bufferedReader = new BufferedReader(new FileReader(file));
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				PaintModel paintModel = new PaintModel();
-				 PaintFileParser parser = new PaintFileParser();
-				 parser.parse(bufferedReader,  paintModel);
+				PaintFileParser parser = new PaintFileParser();
+				parser.parse(bufferedReader,  paintModel);
 				this.setPaintModel(paintModel);
 			} else {
 				System.out.println("Open command cancelled by user." + "\n");

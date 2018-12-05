@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.swing.JOptionPane;
 /**
  * Parse a file in Version 1.0 PaintSaveFile format. An instance of this class
  * understands the paint save file format, storing information about
@@ -28,35 +30,39 @@ public class PaintFileParser {
 	/**
 	 * Below are Patterns used in parsing 
 	 */
-	private Pattern pFileStart=Pattern.compile("^PaintSaveFileVersion1.0$");
-	private Pattern pFileEnd=Pattern.compile("^EndPaintSaveFile$");
+	private Pattern pFileStart=Pattern.compile("^( *)P( *)a( *)i( *)n( *)t( *)S( *)a( *)v( *)e( *)F( *)i( *)l( *)e( *)V( *)e( *)r( *)s( *)i( *)o( *)n( *)1( *)\\.( *)0(\\s*)$");
+	private Pattern pFileEnd=Pattern.compile("^( *)E( *)n( *)d( *)P( *)a( *)i( *)n( *)t( *)S( *)a( *)v( *)e( *)F( *)i( *)l( *)e(\\s*)$");
 
-	private Pattern pCircleStart=Pattern.compile("^Circle$");
-	private Pattern pCircleEnd=Pattern.compile("^EndCircle$");
+	private Pattern pCircleStart=Pattern.compile("^( *)C( *)i( *)r( *)c( *)l( *)e( *)$");
+	private Pattern pCircleEnd=Pattern.compile("^( *)E( *)n( *)d( *)C( *)i( *)r( *)c( *)l( *)e( *)$");
 	// ADD MORE!!
-	private Pattern pRectangleStart=Pattern.compile("^Rectangle$");
-	private Pattern pRectangleEnd=Pattern.compile("^EndRectangle$");
-	private Pattern pSquiggleStart=Pattern.compile("^Squiggle$");
-	private Pattern pSquiggleEnd=Pattern.compile("^EndSquiggle$");
+	private Pattern pRectangleStart=Pattern.compile("^( *)R( *)e( *)c( *)t( *)a( *)n( *)g( *)l( *)e( *)$");
+	private Pattern pRectangleEnd=Pattern.compile("^( *)E( *)n( *)d( *)R( *)e( *)c( *)t( *)a( *)n( *)g( *)l( *)e( *)$");
+	private Pattern pSquiggleStart=Pattern.compile("^( *)S( *)q( *)u( *)i( *)g( *)g( *)l( *)e( *)$");
+	private Pattern pSquiggleEnd=Pattern.compile("^( *)E( *)n( *)d( *)S( *)q( *)u( *)i( *)g( *)g( *)l( *)e( *)$");
 	
 	//For all 3
-	private Pattern pColour=Pattern.compile("^\\s\\s\\s\\scolour:[+]?([0-9]+(?:[\\.][0-9]*)?|\\.[0-9]+),[+]?([0-9]+(?:[\\.][0-9]*)?|\\.[0-9]+),[+]?([0-9]+(?:[\\.][0-9]*)?|\\.[0-9]+)$");
-	private Pattern pFilled=Pattern.compile("^\\s\\s\\s\\sfilled:(true|false)$");
+	//there is something wrong with the color regex
+	private Pattern pColour=Pattern.compile("^(\\s*)color:(\\d+),(\\d+),(\\d+)$");
+	private Pattern pFilled=Pattern.compile("^(\\s*)filled:(true|false)$");
 	
 	//Circle 
-	private Pattern pCentre=Pattern.compile("^\\s\\s\\s\\scentre:\\(\\d+,\\d+\\)$");
-	private Pattern pRadius=Pattern.compile("^\\s\\s\\s\\sradius:\\d+$");
+	private Pattern pCentre=Pattern.compile("^(\\s*)center:\\((\\d+),(\\d+)\\)$");
+	private Pattern pRadius=Pattern.compile("^(\\s*)radius:(\\d+)$");
 	
 	//Rectangle
-	private Pattern pP1=Pattern.compile("^\\s\\s\\s\\sP1:\\(\\d+,\\d+\\)$");
-	private Pattern pP2=Pattern.compile("^\\s\\s\\s\\sP1:\\(\\d+,\\d+\\)$");
+	private Pattern pP1=Pattern.compile("^(\\s*)p1:\\((\\d+),(\\d+)\\)$");
+	private Pattern pP2=Pattern.compile("^(\\s*)p2:\\((\\d+),(\\d+)\\)$");
 	
 	//Squiggle
-	private Pattern pPoints=Pattern.compile("^\\s\\s\\s\\spoints$");
-	private Pattern pPoint=Pattern.compile("^\\s\\s\\s\\spoint:\\(\\d+,\\d+\\)$");//for each point
+	private Pattern pPoints=Pattern.compile("^(\\s*)points$");
+	private Pattern pPointsEnd=Pattern.compile("^(\\s*)end points$");
+	private Pattern pPoint=Pattern.compile("^(\\s*)point:\\((\\d+),(\\d+)\\)$");//for each point
 	
 	//Finding a double value
-	private Pattern pDouble=Pattern.compile("[+]?([0-9]+(?:[\\.][0-9]*)?|\\.[0-9]+)");
+	private Pattern pWhiteSpace=Pattern.compile("\\s*");
+	
+	
 	
 	/**
 	 * Store an appropriate error message in this, including 
@@ -65,6 +71,7 @@ public class PaintFileParser {
 	 */
 	private void error(String mesg){
 		this.errorMessage = "Error in line "+lineNumber+" "+mesg;
+		JOptionPane.showMessageDialog(null, this.errorMessage);
 	}
 	
 	/**
@@ -89,7 +96,7 @@ public class PaintFileParser {
 		this.paintModel = paintModel;
 		this.errorMessage="";
 		
-		String type = "";
+	
 		
 		int rr = (int)(Math.random()*256);
 		int gg = (int)(Math.random()*256);
@@ -117,6 +124,7 @@ public class PaintFileParser {
 			int state=0; Matcher m; String l;
 			
 			this.lineNumber=0;
+			
 			while ((l = inputStream.readLine()) != null) {
 				this.lineNumber++;
 				System.out.println(lineNumber+" "+l+" "+state);
@@ -127,78 +135,112 @@ public class PaintFileParser {
 							state=1;
 							break;
 						}
+						m=pWhiteSpace.matcher(l);
+						if(m.matches()){
+							state=0;
+							break;
+						}
 						error("Expected Start of Paint Save File");
 						return false;
 					case 1: // Looking for the start of a new object or end of the save file
 						m=pCircleStart.matcher(l);
 						if(m.matches()){
-							type = "Circle";
 							state=2; 
 							//System.out.println("hi");
 							break;
 						}
+						
 						m=pRectangleStart.matcher(l);
 						if(m.matches()){
-							type = "Rectangle";
 							state=2; 
 							break;
 						}
 						m=pSquiggleStart.matcher(l);
 						if(m.matches()){
-							type = "Squiggle";
 							state=2; 
 							break;
 						}
 						m=pFileEnd.matcher(l);
 						if(m.matches()){
+							state=11;
+							break;
+						}
 						
-							//state=2; 
+						m=pWhiteSpace.matcher(l);
+						if(m.matches()){
+							state=1;
 							break;
 						}
 						error("Expected Start of a new object or end of the Save File");
-						// ADD CODE
+						
+						throw new Exception();
 				
 					case 2:
+						System.out.println("hi color out");
+						
 						m=pColour.matcher(l);
 						if(m.matches()){
-							Scanner sc = new Scanner(l);
-							int r = (int)(sc.nextDouble());
-							int g = (int)(sc.nextDouble());
-							int b= (int)(sc.nextDouble());
-							sc.close();
+							
+							//System.out.println("hi colour");
+							
+							//make sure each color value in between 0-255
+							
+						
+							//System.out.println("hi colour2");
+							int r = Integer.parseInt(m.group(2));
+							//System.out.println("hi colour3");
+							int g = Integer.parseInt(m.group(3));
+							//System.out.println("hi colour4");
+							int b = Integer.parseInt(m.group(4));
+							//System.out.println("hi colour5");
+						
+							if ((r|g|b) >255 || (r|g|b) <0 ) {
+								error("Expected Colour between 0-255");
+								return false;
+							}
 							color = Color.rgb(r, g, b);
-							state=3; 
+							//System.out.println(color);
+							state=3;
+							
 							break;
 						}
 						//if it comes out here there is an error
-						error("Expected Colour");
+						error("Expected Colour between 0-255");
 						
+						return false;
 					case 3:
 						m=pFilled.matcher(l);
+						//System.out.println("hi fill out");
 						if(m.matches()){
-							Scanner sc = new Scanner(l);
-							fill = sc.nextBoolean();
-							sc.close();
+							//System.out.println("hi fill");
+						
+							fill = Boolean.parseBoolean(m.group(2));
+						
 							state=4; 
 							break;
 						}
 						error("Expected Filled True/False");
+						//System.out.println(errorMessage);
+						return false;
 					case 4:
 						m=pCentre.matcher(l);
 						if(m.matches()){
-							Scanner sc = new Scanner(l);
-							int x = (sc.nextInt());
-							int y = (sc.nextInt());
+							//System.out.println("hi centre");
+							//Scanner sc = new Scanner(l);
+							int x = Integer.parseInt(m.group(2));
+							int y = Integer.parseInt(m.group(3));
 							centre = new Point(x,y);
+							//sc.close();
 							state=5; 
 							break;
 						}
 						m=pP1.matcher(l);
 						if(m.matches()){
-							Scanner sc = new Scanner(l);
-							int x = (sc.nextInt());
-							int y = (sc.nextInt());
+							//Scanner sc = new Scanner(l);
+							int x = Integer.parseInt(m.group(2));
+							int y = Integer.parseInt(m.group(3));
 							p1 = new Point(x,y);
+							//sc.close();
 							state=7; 
 							break;
 						}
@@ -208,18 +250,25 @@ public class PaintFileParser {
 							break;
 						}
 						error("Expected circle centre, or rectangle P1, or squiggle points");
+						//System.out.println(errorMessage);
+						//throw new Exception();
+						return false;
 					case 5:
 						m=pRadius.matcher(l);
 						if(m.matches()){
-							radius = Integer.parseInt(l.substring(10));
 							
+							radius = Integer.parseInt(m.group(2));
+							//sc.close();
 							state=6; 
 							break;
 						}
 						error("Expected Circle Radius");
+						
+						return false;
 					case 6:
 						m=pCircleEnd.matcher(l);
 						if(m.matches()){
+							
 							circleCommand = new CircleCommand(centre, radius);
 							circleCommand.setColor(color);
 							circleCommand.setFill(fill);
@@ -229,17 +278,21 @@ public class PaintFileParser {
 							break;
 						}
 						error("Expected Circle End");
+						
+						return false;
 					case 7:
 						m=pP2.matcher(l);
 						if(m.matches()){
-							Scanner sc = new Scanner(l);
-							int x = (sc.nextInt());
-							int y = (sc.nextInt());
+							//Scanner sc = new Scanner(l);
+							int x = Integer.parseInt(m.group(2));
+							int y = Integer.parseInt(m.group(3));
 							p2 = new Point(x,y);
 							state=8; 
 							break;
 						}
-						error("Expected Rectangle P2");
+						error("Expected Rectangle p2");
+						
+						return false;
 					case 8:
 						m=pRectangleEnd.matcher(l);
 						if(m.matches()){
@@ -251,20 +304,29 @@ public class PaintFileParser {
 							break;
 						}
 						error("Expected Rectangle End");
+						
+						return false;
 					case 9:
 						m=pPoint.matcher(l);
 						if(m.matches()){
-							Scanner sc = new Scanner(l);
-							int x = (sc.nextInt());
-							int y = (sc.nextInt());
+							
+							int x = Integer.parseInt(m.group(2));
+							int y = Integer.parseInt(m.group(3));
 							Point p = new Point(x,y);
 							points.add(p);
 							state=9; //cycle through all the points
 							break;
 						}
-						//if we are here, we are probably at the end of the Squiggle so..
+						//if we are here, we are probably at the end of the points so..
+						m=pPointsEnd.matcher(l);
+						if(m.matches()){
+							state=10; 
+							break;
+						}
+					case 10:
 						m=pSquiggleEnd.matcher(l);
 						if(m.matches()){
+							squiggleCommand = new SquiggleCommand();
 							for (Point po: points) {
 								squiggleCommand.add(po);
 							}
@@ -274,10 +336,20 @@ public class PaintFileParser {
 						}
 						error("Expected Squiggle point or Squiggle End");
 						
+						return false;
+					case 11:
+						error("Cannot have lines after End Paint Save File");
+						return false;
+						
+						
 					// ...
 				}
 			}
 		}  catch (Exception e){
+			//if (!errorMessage.equals("")) {
+				//JOptionPane.showMessageDialog(null, errorMessage);
+				
+			//}
 			
 		}
 		return true;

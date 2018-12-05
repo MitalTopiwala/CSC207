@@ -55,7 +55,7 @@ Dec 2, 2017
 Dec 3, 2017
 	Yesterday :
 	Today     :wrote regex for US3.2
-	Obstacles :
+	Obstacles :time
 
 Dec 4, 2017
 	Yesterday :
@@ -63,9 +63,9 @@ Dec 4, 2017
 	Obstacles :Time
 	
 Dec 5, 2017
-	Yesterday :
-	Today     :
-	Obstacles :
+	Yesterday :I completed US3.1, but didn't get a chance to complete a working US3.2
+	Today     :Complete US3.2 as well as the rest of part 1
+	Obstacles :time
 
 Dec 6, 2017
 	Yesterday :

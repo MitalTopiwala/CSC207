@@ -2,6 +2,39 @@
 # If a USER STORY is large, break it into smaller user stories.
 
 --------------------------------------------------------------------------
+TYPE     : BUG 3.3
+NAME     : Improve architecture for save
+OWNER    :topiwal3
+PRIORITY : 3
+ESTIMATE :
+AS A     : 
+I WANT   :
+DEPENDSON: USER STORY 3.1
+IMPL DTL : 
+
+Now that USER STORY 3.1 is in place...
+
+Code to save may not be simple. To simplify it, add the Visitor
+Design pattern to the Model, then move all code relating to saving
+the model to an appropriate Visitor.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+TYPE     : BUG 3.4
+NAME     : Improve architecture for drawing
+OWNER    :topiwal3
+PRIORITY : 4
+ESTIMATE :
+AS A     : 
+I WANT   :
+DEPENDSON: Bug 3.3
+IMPL DTL : 
+
+With BUG 3.3 in place, we can now move code to draw each part of the model
+to an appropriate Visitor. 
+--------------------------------------------------------------------------
+
+# COMPLETED USER STORIES/BUGS BELOW ###########################################
+--------------------------------------------------------------------------
 TYPE     : USER STORY 3.1
 NAME     : Save Feature
 OWNER    :topiwal3
@@ -42,38 +75,5 @@ the given PaintModel. Some ShapeCommands will require careful parsing.
 For example, you will have to walk
 through a squiggle to properly parse it using Patterns and groups.
 --------------------------------------------------------------------------
---------------------------------------------------------------------------
-TYPE     : BUG 3.3
-NAME     : Improve architecture for save
-OWNER    :topiwal3
-PRIORITY : 3
-ESTIMATE :
-AS A     : 
-I WANT   :
-DEPENDSON: USER STORY 3.1
-IMPL DTL : 
-
-Now that USER STORY 3.1 is in place...
-
-Code to save may not be simple. To simplify it, add the Visitor
-Design pattern to the Model, then move all code relating to saving
-the model to an appropriate Visitor.
---------------------------------------------------------------------------
---------------------------------------------------------------------------
-TYPE     : BUG 3.4
-NAME     : Improve architecture for drawing
-OWNER    :topiwal3
-PRIORITY : 4
-ESTIMATE :
-AS A     : 
-I WANT   :
-DEPENDSON: Bug 3.3
-IMPL DTL : 
-
-With BUG 3.3 in place, we can now move code to draw each part of the model
-to an appropriate Visitor. 
---------------------------------------------------------------------------
-
-# COMPLETED USER STORIES/BUGS BELOW ###########################################
 
 # OMITTED USER STORIES/BUGS BELOW   ###########################################
