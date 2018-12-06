@@ -29,9 +29,9 @@ public abstract class PaintCommand extends Observable {
 		this.fill = fill;
 	}
 	public String toString(){
-		double r = this.color.getRed();
-		double g = this.color.getGreen();
-		double b = this.color.getBlue();
+		int r = (int)(this.color.getRed()*256);
+		int g = (int)(this.color.getGreen()*256);
+		int b = (int)(this.color.getBlue()*256);
 
 		String s = "";
 		s+="\tcolor:"+r+","+g+","+b+"\n";
