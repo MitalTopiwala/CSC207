@@ -32,6 +32,21 @@ IMPL DTL :
 With BUG 3.3 in place, we can now move code to draw each part of the model
 to an appropriate Visitor. 
 --------------------------------------------------------------------------
+--------------------------------------------------------------------------
+TYPE     : USER STORY 3.3
+NAME     : IEEEE754
+OWNER    :topiwal3
+PRIORITY : 1
+ESTIMATE :
+AS A     : 
+I WANT   : 
+SO THAT  :
+IMPL DTL : 
+
+Complete the IEEE754 class so it fits the given format.
+You can find the format in the
+Assignment3 project under Assignment3/IEEE74SingleOut.txt.
+--------------------------------------------------------------------------
 
 # COMPLETED USER STORIES/BUGS BELOW ###########################################
 --------------------------------------------------------------------------

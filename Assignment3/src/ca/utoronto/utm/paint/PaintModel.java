@@ -9,7 +9,10 @@ import javafx.scene.canvas.GraphicsContext;
 
 public class PaintModel extends Observable implements Observer {
 
-	//double fileVersion = 1.0;
+	/**
+	 * Save the current commands to writer
+	 * @param writer
+	 */
 	public void save(PrintWriter writer) {
 		writer.println("Paint Save File Version 1.0");
 		for(PaintCommand c: this.commands){

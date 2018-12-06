@@ -109,18 +109,64 @@ public class IEEE754Single {
 		 */
 
 		int l = Float.floatToRawIntBits(d); // Use this to pull bits of d
-		int sign = 0;
-		int exponent = 0; 
-		int mantissa = 0;
-		String sSign = "";
-		String sExponent = "";
-		String sMantissa = "";
-		String s = sSign + "[" + sExponent + "]" + sMantissa;
-		String t = (sign == 0) ? "+" : "-";
-
-		int trueExponent = 0;
 		
-		t = t + sMantissa + "x2^(" + trueExponent + ")";
+		
+		//System.out.println("hi1");
+		String binaryStr = Integer.toBinaryString(l);
+		binaryStr = thirtyTwoBit(binaryStr);
+		int sign = Integer.parseInt(binaryStr.substring(0, 1));
+		//System.out.println("hi2");
+		int exponent = Integer.parseInt(binaryStr.substring(1, 9)); 
+		//System.out.println("hi3");
+		//int mantissa = Integer.parseInt(binaryStr.substring(9));
+		//System.out.println("hi3");
+		String sSign = binaryStr.substring(0, 1);
+		//System.out.println("hi3");
+		String sExponent = binaryStr.substring(1, 9);
+		//System.out.println("hi4");
+		String sMantissa = binaryStr.substring(9);
+		String s = sSign + "[" + sExponent + "]" + sMantissa;
+		String sfront = "1";
+		if (sExponent.equals("00000000")){
+			sfront ="0";
+		}
+		
+		//int front = Integer.parseInt(sfront); 
+		String t = (sign == 0) ? "+" : "-";
+		int bias = 127;
+		if (sfront.equals("0")){
+			bias = 126;
+		}
+
+		int exponentBaseTen = Integer.parseInt(sExponent, 2);
+		int trueExponent = exponentBaseTen - bias;
+		if(sExponent.equals("00000000")){
+			trueExponent = 0;
+				
+		}
+			
+		
+		
+		t = t +sfront+"."+sMantissa + "x2^(" + trueExponent + ")";
 		return (s + "=" + t + "=" + d);
+	}
+	
+	/**
+	 * add 0's to the start of bit until it is 32 bits
+	 * @param bit
+	 * @return an int that is equivalent to bit, but is 32 bits
+	 */
+	public static String thirtyTwoBit(String bit) {
+		int loop = 32 - (bit).length();
+		//String toAdd = "";
+		while (loop > 0) {
+			//toAdd = toAdd+"0";
+			bit = "0"+bit;
+			loop -= 1;
+		}
+		//String sl = toAdd+ String.valueOf(bit);
+		//bit = Integer.parseInt(sl);
+		return bit;
+		
 	}
 }

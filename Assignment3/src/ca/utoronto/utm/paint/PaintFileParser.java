@@ -176,7 +176,7 @@ public class PaintFileParser {
 						throw new Exception();
 				
 					case 2:
-						System.out.println("hi color out");
+						//System.out.println("hi color out");
 						
 						m=pColour.matcher(l);
 						if(m.matches()){

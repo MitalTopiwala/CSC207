@@ -64,7 +64,7 @@ Dec 4, 2017
 	
 Dec 5, 2017
 	Yesterday :I completed US3.1, but didn't get a chance to complete a working US3.2
-	Today     :Complete US3.2 as well as the rest of part 1
+	Today     :Complete US3.2 and IEEE754Single.java
 	Obstacles :time
 
 Dec 6, 2017
