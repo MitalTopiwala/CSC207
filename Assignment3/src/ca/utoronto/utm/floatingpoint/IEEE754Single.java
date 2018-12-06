@@ -111,19 +111,19 @@ public class IEEE754Single {
 		int l = Float.floatToRawIntBits(d); // Use this to pull bits of d
 		
 		
-		//System.out.println("hi1");
+		
 		String binaryStr = Integer.toBinaryString(l);
 		binaryStr = thirtyTwoBit(binaryStr);
 		int sign = Integer.parseInt(binaryStr.substring(0, 1));
-		//System.out.println("hi2");
+	;
 		int exponent = Integer.parseInt(binaryStr.substring(1, 9)); 
-		//System.out.println("hi3");
+	
 		//int mantissa = Integer.parseInt(binaryStr.substring(9));
-		//System.out.println("hi3");
+	
 		String sSign = binaryStr.substring(0, 1);
-		//System.out.println("hi3");
+		
 		String sExponent = binaryStr.substring(1, 9);
-		//System.out.println("hi4");
+	
 		String sMantissa = binaryStr.substring(9);
 		String s = sSign + "[" + sExponent + "]" + sMantissa;
 		String sfront = "1";
@@ -152,7 +152,7 @@ public class IEEE754Single {
 	}
 	
 	/**
-	 * add 0's to the start of bit until it is 32 bits
+	 * add 0's to the beginning of bit until it is 32 bits
 	 * @param bit
 	 * @return an int that is equivalent to bit, but is 32 bits
 	 */

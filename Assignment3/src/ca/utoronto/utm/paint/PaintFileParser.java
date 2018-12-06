@@ -146,7 +146,7 @@ public class PaintFileParser {
 						m=pCircleStart.matcher(l);
 						if(m.matches()){
 							state=2; 
-							//System.out.println("hi");
+							
 							break;
 						}
 						
@@ -176,30 +176,27 @@ public class PaintFileParser {
 						throw new Exception();
 				
 					case 2:
-						//System.out.println("hi color out");
+						
 						
 						m=pColour.matcher(l);
 						if(m.matches()){
 							
-							//System.out.println("hi colour");
 							
 							//make sure each color value in between 0-255
 							
-						
-							//System.out.println("hi colour2");
 							int r = Integer.parseInt(m.group(2));
-							//System.out.println("hi colour3");
+							
 							int g = Integer.parseInt(m.group(3));
-							//System.out.println("hi colour4");
+							
 							int b = Integer.parseInt(m.group(4));
-							//System.out.println("hi colour5");
+					
 						
 							if ((r|g|b) >255 || (r|g|b) <0 ) {
 								error("Expected Colour between 0-255");
 								return false;
 							}
 							color = Color.rgb(r, g, b);
-							//System.out.println(color);
+							
 							state=3;
 							
 							break;
@@ -210,9 +207,9 @@ public class PaintFileParser {
 						return false;
 					case 3:
 						m=pFilled.matcher(l);
-						//System.out.println("hi fill out");
+					
 						if(m.matches()){
-							//System.out.println("hi fill");
+							
 						
 							fill = Boolean.parseBoolean(m.group(2));
 						
@@ -220,27 +217,26 @@ public class PaintFileParser {
 							break;
 						}
 						error("Expected Filled True/False");
-						//System.out.println(errorMessage);
+						
 						return false;
 					case 4:
 						m=pCentre.matcher(l);
 						if(m.matches()){
-							//System.out.println("hi centre");
-							//Scanner sc = new Scanner(l);
+						
 							int x = Integer.parseInt(m.group(2));
 							int y = Integer.parseInt(m.group(3));
 							centre = new Point(x,y);
-							//sc.close();
+						
 							state=5; 
 							break;
 						}
 						m=pP1.matcher(l);
 						if(m.matches()){
-							//Scanner sc = new Scanner(l);
+							
 							int x = Integer.parseInt(m.group(2));
 							int y = Integer.parseInt(m.group(3));
 							p1 = new Point(x,y);
-							//sc.close();
+						
 							state=7; 
 							break;
 						}
@@ -250,8 +246,7 @@ public class PaintFileParser {
 							break;
 						}
 						error("Expected circle centre, or rectangle P1, or squiggle points");
-						//System.out.println(errorMessage);
-						//throw new Exception();
+						
 						return false;
 					case 5:
 						m=pRadius.matcher(l);
